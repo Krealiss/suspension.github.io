@@ -91,7 +91,7 @@
                 <h2 class="h2">Наші переваги</h2>
                 <div class="grid">
                     <div class="card"><i class="fa-solid fa-industry"></i><br>Власне виробництво</div>
-                    <div class="card"><i class="fa-solid fa-shield-halved"></i><br>Висока якість сталі</div>
+                    <div class="card"><i class="fa-solid fa-star"></i><br>Висока якість сталі</div>
                     <div class="card"><i class="fa-solid fa-truck-fast"></i><br>Швидка доставка</div>
                     <div class="card"><i class="fa-solid fa-coins"></i><br>Доступна ціна</div>
 
@@ -125,66 +125,64 @@
         <section id="contact" class="contact">
             <div class="container">
                 <h2>Зв'язатися з нами</h2>
-                <p>Телефонуйте або залиште заявку — ми вам передзвонимо!</p>
-                <p>📞 +38 (067) 123-45-67</p>
-                <p>📧 pivdysy.ua@gmail.com</p>
-                <form>
-                    <input type="text" placeholder="Ваше ім'я" required />
-                    <input type="tel" placeholder="Телефон" required />
-                    <textarea placeholder="Повідомлення"></textarea>
+                <p>Заповніть форму, і ми зв'яжемося з вами для консультації та відповіді на всі запитання.</p>
+                <form action="" method="post">
+                    <label for="name">Як до вас звертатися?</label>
+                    <input type="text" id="name" placeholder="Ваше ім'я" required />
+                    <label for="contact">Ваш номер телефону або елекронна пошта</label>
+                    <input type="text" id="contact" placeholder="Телефон" required />
+                    <label for="message">Ваше повідомлення</label>
+                    <textarea placeholder="Повідомлення" id="message"></textarea>
                     <button type="submit">Надіслати</button>
                 </form>
             </div>
             <!--<a href="#top" class="scroll-down to-top">Повернутися ↑</a>-->
         </section>
 
-        <!--<section id="testimonials" class="testimonials">
-            <div class="container">
-                <h2 data-aos="fade-up">Відгуки клієнтів</h2>
-                <div class="grid">
-                    <div class="card" data-aos="fade-up">
-                        <p>“Отримали замовлення за 2 дні. Дуже задоволені якістю!”</p>
-                        <strong>– Андрій, Львів</strong>
-                    </div>
-                    <div class="card" data-aos="fade-up" data-aos-delay="100">
-                        <p>“Користуємось на об'єктах — тримають чудово.”</p>
-                        <strong>– Олександр, Київ</strong>
-                    </div>
-                </div>
-            </div>
-        </section>-->
 
         <section id="faq" class="faq">
             <div class="container">
-                <h2 data-aos="fade-up">Поширені питання</h2>
-                <details data-aos="fade-up">
-                    <summary>Яке мінімальне замовлення?</summary>
-                    <p>Від 100 шт. Але завжди можна домовитись індивідуально.</p>
-                </details>
-                <details data-aos="fade-up">
-                    <summary>Чи є сертифікати якості?</summary>
-                    <p>Так, продукція має всі необхідні документи.</p>
-                </details>
-            </div>
+                <h2>Поширені питання</h2>
 
-            <footer>
-                <div class="container">
-                    <div class="social">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-telegram"></i></a>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Яке мінімальне замовлення?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Від 100 шт. Але завжди можна домовитись індивідуально.</p>
                     </div>
-                    <p>&copy; 2025 Підвіси UA. Всі права захищено.</p>
                 </div>
-            </footer>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Чи є сертифікати якості?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Так, продукція має всі необхідні документи.</p>
+                    </div>
+                </div>
+            </div>
         </section>
+
+        <footer>
+            <div class="container">
+
+                <!-- Соцмережі -->
+                <div class="social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                </div>
+
+                <!-- Копірайт -->
+                <p>&copy; 2025 Підвіси UA. Всі права захищено.</p>
+            </div>
+        </footer>
     </main>
-
-
-
-    
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>AOS.init();</script>
-    
+
 </body>
 </html>
