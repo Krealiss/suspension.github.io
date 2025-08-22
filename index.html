@@ -9,33 +9,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
     <title>Прямий підвіс для гіпсокартону</title>
-    <script src="src/main.js"></script>
-    <link rel="stylesheet" href="src/style.css" />
+
+    <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
 
 
-    <main class="scroll-container" id="top">
+    <main class="scroll-container">
 
-        <section class="hero">
+        <section class="hero" id="top">
             <header data-aos="fade-down">
                 <div class="container">
                     <div class="logo">БудТех</div>
                     <nav id="nav">
-                        <a href="#about">Технічні характеристики</a>
+                        <a href="#about">Про нас</a>
+                        <a href="#characteristics">Технічні характеристики</a>
                         <a href="#advantages">Переваги</a>
                         <a href="#gallery">Галерея</a>
                         <a href="#contact">Контакти</a>
                     </nav>
                     <div class="contact-button">
                         <span style="color: red; font-size: 18px" class="fa fa-phone"></span>
-                        <a href="tel:+380686850086">+38 (068) 685-00-86</a>
+                        <a href="tel:+380686850086">+38 (068) 685-00-85</a>
                     </div>
                     <div class="lang-switch">
 
                         <button onclick="setLang('uk')">UA</button>
-                        <a style="font-size:20px">/</a>
+                        <!--<a style="font-size:20px">/</a>-->
                         <button onclick="setLang('en')">EN</button>
                     </div>
                     <div class="burger" id="burger">
@@ -55,7 +57,7 @@
                         <span>Швидко</span>
                     </div>
 
-                    <a href="#contact" class="btn">Замовити зараз</a>
+                    <a href="order.html" class="btn">Замовити зараз</a>
                     <a href="#about" class="btn">Дізнатися більше</a>
                 </div>
                 <div class="product-image" data-aos="fade-left">
@@ -65,6 +67,14 @@
         </section>
 
         <section id="about" class="about">
+            <div class="container">
+                <h2>Про нас</h2>
+                <p>Ми — виробник якісних підвісів для гіпсокартону. Наша продукція виготовляється з оцинкованої сталі товщиною 0.9–1.0 мм, що забезпечує високу міцність та надійність.</p>
+                <img src="src/images/512.png" alt="Лого компанії"/>
+            </div>
+        </section>
+
+        <section id="characteristics" class="characteristics">
             <div class="container">
                 <h2>Технічні характеристики</h2>
                 <div class="grid">
@@ -118,36 +128,34 @@
                     <button class="slide-btn right">&#10095;</button>
                 </div>
             </div>
-            <!--<a href="#contact" class="scroll-down">Більше ↓</a>-->
+
+
         </section>
 
 
         <section id="contact" class="contact">
             <div class="container">
                 <h2>Зв'язатися з нами</h2>
-                <p>Заповніть форму, і ми зв'яжемося з вами для консультації та відповіді на всі запитання.</p>
-                <form action="" method="post">
-                    <label for="name">Як до вас звертатися?</label>
-                    <input type="text" id="name" placeholder="Ваше ім'я" required />
-                    <label for="contact">Ваш номер телефону або елекронна пошта</label>
-                    <input type="text" id="contact" placeholder="Телефон" required />
-                    <label for="message">Ваше повідомлення</label>
-                    <textarea placeholder="Повідомлення" id="message"></textarea>
-                    <button type="submit">Надіслати</button>
-                </form>
+                <p>Маєте питання? Запитайте їх у застосунках нижче.</p>
+                <div class="social">
+                    <!--<a href="#"><i class="fab fa-instagram"></i></a>-->
+                    <!--<a href="#"><i class="fab fa-facebook"></i></a>-->
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-viber"></i></a>
+                </div>
+                <p>Або телефонуйте за номером нижче</p>
+                <a class="phone" href="tel:+380686850086">+38 (068) 685-00-85</a>
             </div>
-            <!--<a href="#top" class="scroll-down to-top">Повернутися ↑</a>-->
         </section>
-
 
         <section id="faq" class="faq">
             <div class="container">
-                <h2>Поширені питання</h2>
+                <h2>Відповіді на можливі питання</h2>
 
                 <div class="faq-item">
                     <button class="faq-question">
                         Яке мінімальне замовлення?
-                        <span class="faq-icon">+</span>
+                        <span class="faq-icon">&#62;</span>
                     </button>
                     <div class="faq-answer">
                         <p>Від 100 шт. Але завжди можна домовитись індивідуально.</p>
@@ -157,30 +165,43 @@
                 <div class="faq-item">
                     <button class="faq-question">
                         Чи є сертифікати якості?
-                        <span class="faq-icon">+</span>
+                        <span class="faq-icon">&#62;</span>
                     </button>
                     <div class="faq-answer">
                         <p>Так, продукція має всі необхідні документи.</p>
                     </div>
                 </div>
             </div>
+            <footer>
+                <div class="container">
+
+                    <!-- Соцмережі -->
+                    <div class="social">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                    <div class="footer-phone">
+                        <a href="tel:+380686850086">
+                            +38 (068) 685-00-85
+                        </a>
+                    </div>
+                    <!-- Копірайт -->
+                    <p>&copy; 2025 Підвіси UA. Всі права захищено.</p>
+                </div>
+                
+
+            </footer>
         </section>
 
-        <footer>
-            <div class="container">
 
-                <!-- Соцмережі -->
-                <div class="social">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-telegram"></i></a>
-                </div>
+        <a href="#top" class="to-top" aria-label="Нагору">
+            <i class="fa-solid fa-arrow-up"></i>
+        </a>
 
-                <!-- Копірайт -->
-                <p>&copy; 2025 Підвіси UA. Всі права захищено.</p>
-            </div>
-        </footer>
     </main>
+    <script src="main.js" defer></script>
+
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>AOS.init();</script>
 
