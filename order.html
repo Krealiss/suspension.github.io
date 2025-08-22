@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма замовлення</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: url("src/images/1.jpg")no-repeat center center/cover;
+            height: 100%;
+        }
+
+        form {
+            max-width: 400px;
+            margin: auto;
+        }
+
+        h2 {
+            color:#ffd800;
+        }
+        textarea{
+            color: white;
+        }
+
+        label {
+            color:white;
+            display: block;
+            margin-top: 10px;
+        }
+        input{
+            background-color: #222;
+        }
+
+        input text {
+            color: white;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        .total {
+            color: white;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        button {
+            color: white;
+            background-color: #222;
+        }
+
+        .success {
+            margin-top: 20px;
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Замовлення кріплень</h2>
+    <form id="orderForm">
+        <label>
+            Ваше ім'я:
+            <input type="text" id="name" required>
+        </label>
+
+        <label>
+            Телефон:
+            <input type="text" id="phone" required>
+        </label>
+
+        <label>
+            Кількість (тільки сотнями):
+            <input type="number" id="quantity" min="100" step="100" required>
+        </label>
+
+        <label>
+            Доставка:
+            <select id="delivery" required>
+                <option value="0">Самовивіз (0 грн)</option>
+                <option value="80">Нова пошта (80 грн)</option>
+                <option value="60">Укрпошта (60 грн)</option>
+            </select>
+        </label>
+
+        <label id="addressLabel" style="display:none;">
+            Адреса доставки:
+            <input type="text" id="address">
+        </label>
+
+        <div class="total">Сума: <span id="totalPrice">0</span> грн</div>
+
+        <button type="submit">Замовити</button>
+    </form>
+
+    <div id="successMessage" class="success" style="display:none;"></div>
+
+    <script>
+const PRICE_PER_100 = 300; // ціна за 100 штук
+const BOT_TOKEN = "5302824520:AAG6D_Rjn0atmuB99G3U9drbzpaF_hXhMeI";
+const CHAT_ID = "577102344";
+
+// збереження кількості замовлень на сьогодні
+let dailyOrderCounter = 0;
+let lastOrderDate = "";
+
+// функція розрахунку ціни
+function calculateTotal() {
+  const qty = parseInt(document.getElementById("quantity").value) || 0;
+  const delivery = parseInt(document.getElementById("delivery").value) || 0;
+  const itemsTotal = (qty / 100) * PRICE_PER_100;
+  return itemsTotal + delivery;
+}
+
+// показати / сховати поле адреси
+function toggleAddressField() {
+  const delivery = document.getElementById("delivery").value;
+  const addressLabel = document.getElementById("addressLabel");
+  const addressInput = document.getElementById("address");
+
+  if (delivery === "0") {
+    addressLabel.style.display = "none";
+    addressInput.required = false;
+  } else {
+    addressLabel.style.display = "block";
+    addressInput.required = true;
+  }
+}
+
+// підрахунок ціни
+document.getElementById("quantity").addEventListener("input", () => {
+  document.getElementById("totalPrice").textContent = calculateTotal();
+});
+document.getElementById("delivery").addEventListener("change", () => {
+  document.getElementById("totalPrice").textContent = calculateTotal();
+  toggleAddressField();
+});
+
+// обробка форми
+document.getElementById("orderForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const qty = document.getElementById("quantity").value;
+  const deliverySelect = document.getElementById("delivery");
+  const deliveryText = deliverySelect.options[deliverySelect.selectedIndex].text;
+  const address = document.getElementById("address").value || "—";
+  const total = calculateTotal();
+
+  // дата та час
+  const now = new Date();
+  const date = now.toLocaleDateString("uk-UA");
+  const time = now.toLocaleTimeString("uk-UA");
+
+  // створення номера замовлення
+  const todayStr = now.toISOString().slice(0,10).replace(/-/g,""); // YYYYMMDD
+  if (todayStr !== lastOrderDate) {
+    dailyOrderCounter = 0;
+    lastOrderDate = todayStr;
+  }
+  dailyOrderCounter++;
+  const orderNumber = `#${todayStr}-${String(dailyOrderCounter).padStart(3,"0")}`;
+
+  const message = `
+🛒 НОВЕ ЗАМОВЛЕННЯ ${orderNumber}
+📅 Дата: ${date}
+⏰ Час: ${time}
+
+👤 Ім'я: ${name}
+📞 Телефон: ${phone}
+📦 Кількість: ${qty}
+🚚 Доставка: ${deliveryText}
+🏠 Адреса: ${address}
+💰 Сума: ${total} грн
+  `;
+
+  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: message
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("successMessage").textContent =
+      `✅ Ваше замовлення ${orderNumber} успішно надіслано!`;
+    document.getElementById("successMessage").style.display = "block";
+    document.getElementById("orderForm").reset();
+    document.getElementById("totalPrice").textContent = "0";
+    toggleAddressField();
+  })
+  .catch(err => alert("Помилка: " + err));
+});
+
+// ініціалізація при завантаженні
+toggleAddressField();
+    </script>
+
+</body>
+</html>
