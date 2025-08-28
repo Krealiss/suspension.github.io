@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿﻿
+<!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
@@ -11,78 +12,195 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url("src/images/1.jpg") no-repeat center/cover;
             padding: 20px;
-            background: url("src/images/1.jpg")no-repeat center center/cover;
-            height: 100%;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: -1;
         }
 
         form {
-            max-width: 400px;
-            margin: auto;
+            background: rgba(34,34,34,0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 420px;
+            width: 100%;
+            color: #fff;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            animation: fadeIn 0.8s ease;
         }
 
         h2 {
-            color:#ffd800;
-        }
-        textarea{
-            color: white;
+            text-align: center;
+            color: #ffd800;
+            margin-bottom: 20px;
         }
 
         label {
-            color:white;
             display: block;
-            margin-top: 10px;
-        }
-        input{
-            background-color: #222;
-        }
-
-        input text {
-            color: white;
-        }
-
-        input, select, button {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-        }
-
-        .total {
-            color: white;
             margin-top: 15px;
-            font-weight: bold;
+            font-size: 14px;
         }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border-radius: 10px;
+            border: 1px solid #555;
+            background: #111;
+            color: #fff;
+            font-size: 14px;
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+
+            input:focus, select:focus {
+                outline: none;
+                border-color: #ffd800;
+                box-shadow: 0 0 8px #ffd80088;
+            }
 
         button {
-            color: white;
-            background-color: #222;
+            width: 100%;
+            padding: 14px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(45deg, #ffd800, #ff8c00);
+            color: #222;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+            button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            }
+
+        .total {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
         }
 
         .success {
-            margin-top: 20px;
-            color: green;
+            margin-top: 15px;
+            color: #90ee90;
             font-weight: bold;
+            text-align: center;
+            display: none;
+        }
+
+        .loader {
+            display: none;
+            margin-top: 10px;
+            text-align: center;
+            color: #ffd800;
+            font-size: 14px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 📱 Мобільна адаптація */
+        @media (max-width: 600px) {
+            body {
+                padding: 0;
+            }
+
+            form {
+                max-width: 100%; /* займає всю ширину */
+                min-height: 100vh; /* займає всю висоту */
+                border-radius: 0; /* прибираємо скруглення */
+                box-shadow: none; /* без тіней */
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 25px 20px;
+            }
+
+            h2 {
+                font-size: 24px;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            label {
+                font-size: 16px;
+            }
+
+            input, select {
+                font-size: 18px;
+                padding: 14px;
+            }
+
+            button {
+                font-size: 20px;
+                padding: 18px;
+                margin-top: auto; /* кнопка притиснеться вниз */
+            }
+
+            .total {
+                font-size: 22px;
+                margin-top: 30px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <h2>Замовлення кріплень</h2>
+    <div class="overlay"></div>
+
     <form id="orderForm">
+        <h2>Замовлення кріплень</h2>
+
         <label>
-            Ваше ім'я:
-            <input type="text" id="name" required>
+            Ваше повне ім'я(ПІБ):
+            <input type="text" id="name" placeholder="Гнатюк Гаврило Батькович" required>
+        </label>
+
+        <label>
+            Спосіб зв’язку:
+            <select id="contactMethod" required>
+                <option value="Зателефонувати">Зателефонувати</option>
+                <option value="telegram">Telegram</option>
+                <option value="viber">Viber</option>
+            </select>
         </label>
 
         <label>
             Телефон:
-            <input type="text" id="phone" required>
+            <input type="tel" id="phone" placeholder="+38 (0XX) XXX-XX-XX" required>
         </label>
 
         <label>
-            Кількість (тільки сотнями):
-            <input type="number" id="quantity" min="100" step="100" required>
+            Кількість (сотнями):
+            <input type="number" id="quantity" min="100" step="100" placeholder="Напр. 200" required>
         </label>
 
         <label>
@@ -96,118 +214,122 @@
 
         <label id="addressLabel" style="display:none;">
             Адреса доставки:
-            <input type="text" id="address">
+            <input type="text" id="address" placeholder="Введіть адресу">
         </label>
 
         <div class="total">Сума: <span id="totalPrice">0</span> грн</div>
 
         <button type="submit">Замовити</button>
+
+        <div class="loader" id="loader">⏳ Надсилається...</div>
+        <div id="successMessage" class="success"></div>
     </form>
 
-    <div id="successMessage" class="success" style="display:none;"></div>
-
     <script>
-const PRICE_PER_100 = 300; // ціна за 100 штук
-const BOT_TOKEN = "5302824520:AAG6D_Rjn0atmuB99G3U9drbzpaF_hXhMeI";
-const CHAT_ID = "577102344";
+        const phoneInput = document.getElementById("phone");
 
-// збереження кількості замовлень на сьогодні
-let dailyOrderCounter = 0;
-let lastOrderDate = "";
+        phoneInput.addEventListener("focus", function () {
+            if (this.value.trim() === "") {
+                this.value = "+38";
+            }
+        });
 
-// функція розрахунку ціни
-function calculateTotal() {
-  const qty = parseInt(document.getElementById("quantity").value) || 0;
-  const delivery = parseInt(document.getElementById("delivery").value) || 0;
-  const itemsTotal = (qty / 100) * PRICE_PER_100;
-  return itemsTotal + delivery;
-}
+        phoneInput.addEventListener("input", function () {
+            let digits = this.value.replace(/\D/g, "");
+            if (!digits.startsWith("38")) {
+                digits = "38" + digits;
+            }
+            digits = digits.substring(0, 12);
 
-// показати / сховати поле адреси
-function toggleAddressField() {
-  const delivery = document.getElementById("delivery").value;
-  const addressLabel = document.getElementById("addressLabel");
-  const addressInput = document.getElementById("address");
+            let formatted = "";
+            if (digits.length > 0) formatted = "+" + digits.substring(0, 2);
+            if (digits.length >= 3) formatted += " (" + digits.substring(2, 5);
+            if (digits.length >= 5) formatted += ") " + digits.substring(5, 8);
+            if (digits.length >= 8) formatted += "-" + digits.substring(8, 10);
+            if (digits.length >= 10) formatted += "-" + digits.substring(10, 12);
 
-  if (delivery === "0") {
-    addressLabel.style.display = "none";
-    addressInput.required = false;
-  } else {
-    addressLabel.style.display = "block";
-    addressInput.required = true;
-  }
-}
+            this.value = formatted;
+        });
 
-// підрахунок ціни
-document.getElementById("quantity").addEventListener("input", () => {
-  document.getElementById("totalPrice").textContent = calculateTotal();
-});
-document.getElementById("delivery").addEventListener("change", () => {
-  document.getElementById("totalPrice").textContent = calculateTotal();
-  toggleAddressField();
-});
+        phoneInput.addEventListener("keydown", function (e) {
+            if (e.key === "Backspace") {
+                let val = this.value;
+                if (/[()\-\s]$/.test(val)) {
+                    this.value = val.slice(0, -1);
+                    e.preventDefault();
+                }
+            }
+        });
 
-// обробка форми
-document.getElementById("orderForm").addEventListener("submit", function(e) {
-  e.preventDefault();
+        const PRICE_PER_100 = 300;
 
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const qty = document.getElementById("quantity").value;
-  const deliverySelect = document.getElementById("delivery");
-  const deliveryText = deliverySelect.options[deliverySelect.selectedIndex].text;
-  const address = document.getElementById("address").value || "—";
-  const total = calculateTotal();
+        function calculateTotal() {
+            const qty = parseInt(document.getElementById("quantity").value) || 0;
+            const delivery = parseInt(document.getElementById("delivery").value) || 0;
+            const itemsTotal = (qty / 100) * PRICE_PER_100;
+            return itemsTotal + delivery;
+        }
 
-  // дата та час
-  const now = new Date();
-  const date = now.toLocaleDateString("uk-UA");
-  const time = now.toLocaleTimeString("uk-UA");
+        function toggleAddressField() {
+            const delivery = document.getElementById("delivery").value;
+            const addressLabel = document.getElementById("addressLabel");
+            const addressInput = document.getElementById("address");
 
-  // створення номера замовлення
-  const todayStr = now.toISOString().slice(0,10).replace(/-/g,""); // YYYYMMDD
-  if (todayStr !== lastOrderDate) {
-    dailyOrderCounter = 0;
-    lastOrderDate = todayStr;
-  }
-  dailyOrderCounter++;
-  const orderNumber = `#${todayStr}-${String(dailyOrderCounter).padStart(3,"0")}`;
+            if (delivery === "0") {
+                addressLabel.style.display = "none";
+                addressInput.required = false;
+            } else {
+                addressLabel.style.display = "block";
+                addressInput.required = true;
+            }
+        }
 
-  const message = `
-🛒 НОВЕ ЗАМОВЛЕННЯ ${orderNumber}
-📅 Дата: ${date}
-⏰ Час: ${time}
+        document.getElementById("quantity").addEventListener("input", () => {
+            document.getElementById("totalPrice").textContent = calculateTotal();
+        });
+        document.getElementById("delivery").addEventListener("change", () => {
+            document.getElementById("totalPrice").textContent = calculateTotal();
+            toggleAddressField();
+        });
 
-👤 Ім'я: ${name}
-📞 Телефон: ${phone}
-📦 Кількість: ${qty}
-🚚 Доставка: ${deliveryText}
-🏠 Адреса: ${address}
-💰 Сума: ${total} грн
-  `;
+        // 🔹 Єдиний обробник форми
+        document.getElementById("orderForm").addEventListener("submit", function (e) {
+            e.preventDefault();
 
-  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      chat_id: CHAT_ID,
-      text: message
-    })
-  })
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById("successMessage").textContent =
-      `✅ Ваше замовлення ${orderNumber} успішно надіслано!`;
-    document.getElementById("successMessage").style.display = "block";
-    document.getElementById("orderForm").reset();
-    document.getElementById("totalPrice").textContent = "0";
-    toggleAddressField();
-  })
-  .catch(err => alert("Помилка: " + err));
-});
+            document.getElementById("loader").style.display = "block";
 
-// ініціалізація при завантаженні
-toggleAddressField();
+            const data = {
+                name: document.getElementById("name").value,
+                phone: document.getElementById("phone").value,
+                qty: document.getElementById("quantity").value,
+                delivery: document.getElementById("delivery").value,
+                address: document.getElementById("address").value || "—",
+                contactMethod: document.getElementById("contactMethod").value,
+                total: document.getElementById("totalPrice").textContent
+            };
+
+            fetch("http://localhost:8000/order", {   // 🚀 змінити на твій сервер у продакшні
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+                .then(res => res.json())
+                .then(result => {
+                    document.getElementById("loader").style.display = "none";
+                    document.getElementById("successMessage").textContent =
+                        `✅ Ваше замовлення ${result.orderNumber} успішно надіслано!`;
+                    document.getElementById("successMessage").style.display = "block";
+                    document.getElementById("orderForm").reset();
+                    document.getElementById("totalPrice").textContent = "0";
+                    toggleAddressField();
+                })
+                .catch(err => {
+                    document.getElementById("loader").style.display = "none";
+                    alert("Помилка: " + err);
+                });
+        });
+
+        toggleAddressField();
     </script>
 
 </body>

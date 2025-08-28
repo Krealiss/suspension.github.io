@@ -794,7 +794,7 @@ html {
 
 
 /* --- Адаптація для мобільних та планшетів --- */
-@media (max-width: 1100px) {
+@media (max-width: 900px) {
     .header .container {
         display: flex;
     }
