@@ -308,7 +308,7 @@
                 total: document.getElementById("totalPrice").textContent
             };
 
-            fetch("http://localhost:8000/order", {   // 🚀 змінити на твій сервер у продакшні
+            fetch("https://order-bot-6fop.onrender.com/order", {   // 🚀 змінити на твій сервер у продакшні
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data)
