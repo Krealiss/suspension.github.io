@@ -131,21 +131,21 @@
 
         /* 📱 Мобільна адаптація */
         @media (max-width: 600px) {
-  form {
-    padding: 10px;
-  }
-
-  input, select, textarea, button {
-    font-size: 18px;
-    padding: 14px;
-  }
-
-  button {
-    background-color: #007bff;
-    color: white;
-  }
-}
-
+              form {
+                padding: 10px;
+              }
+            
+              input, select, textarea, button {
+                font-size: 18px;
+                padding: 14px;
+              }
+            
+              button {
+                background-color: #007bff;
+                color: white;
+              }
+            }
+            
             h2 {
                 font-size: 24px;
                 margin-bottom: 20px;
@@ -319,7 +319,8 @@
                 .then(result => {
                     document.getElementById("loader").style.display = "none";
                     document.getElementById("successMessage").textContent =
-                        `✅ Ваше замовлення ${result.orderNumber} успішно надіслано!`;
+                        `✅ Ваше замовлення ${result.orderNumber} успішно надіслано! 
+        Дякуємо за замовлення!`;
                     document.getElementById("successMessage").style.display = "block";
                     document.getElementById("orderForm").reset();
                     document.getElementById("totalPrice").textContent = "0";
